@@ -51,7 +51,7 @@ def download_image(set_acronym, card_name, card_url):
             print('caught mismatch', card_url, downloaded_size, original_filesize)
             
             urllib.request.urlretrieve(card_url, "./magic_card_detector/cards/%s - %s.png" % (set_acronym, card_name))
-            
+            original_filesize = urllib.request.urlopen(card_url).length
             downloaded_size = os.stat("./magic_card_detector/cards/%s - %s.png" % (set_acronym, card_name)).st_size
             
     except Exception as e:
