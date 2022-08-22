@@ -31,14 +31,33 @@ conn = sqlite3.connect('all_cards.db')
 
 driver = webdriver.Chrome()
 
+#multitasking.set_max_threads(4)
+
+
 @multitasking.task
 def download_image(set_acronym, card_name, card_url):
-    isExist = os.path.exists("./cards/%s - %s.png" % (set_acronym, card_name))
-    if isExist:
-        return
 
-    urllib.request.urlretrieve(card_url, "./cards/%s - %s.png" % (set_acronym, card_name))
-    print('downloaded image', card_url)
+    downloaded_size = 0
+    try:
+         
+        downloaded_size = os.stat("./magic_card_detector/cards/%s - %s.png" % (set_acronym, card_name)).st_size
+    except:
+        pass
+
+    try:
+        original_filesize = urllib.request.urlopen(card_url).length
+        while downloaded_size != original_filesize:
+            if downloaded_size != original_filesize:
+                print('caught mismatch', card_url, downloaded_size, original_filesize)
+            
+            urllib.request.urlretrieve(card_url, "./magic_card_detector/cards/%s - %s.png" % (set_acronym, card_name))
+            
+            downloaded_size = os.stat("./magic_card_detector/cards/%s - %s.png" % (set_acronym, card_name)).st_size
+            
+    except Exception as e:
+        print('got exception', e)
+        print(set_acronym, card_name, card_url)
+    #print('downloaded image', card_url)
 
 
 def download_image_wrapper(card_input):
@@ -47,12 +66,12 @@ def download_image_wrapper(card_input):
 
 
 
-for set_number in range(300,393):
+for set_number in range(0,400):
     url = 'https://www.mtgpics.com/set?set='+str(set_number)
 
 
     #driver = webdriver.Chrome(executable_path='C:\\Users\\nbrei\\Documents\\GitHub\\OptimalEve\\chromedriver.exe', options=options)
-    
+    print('getting', url)
     driver.get(url)
     
     if ' art' in driver.title.lower():
@@ -72,7 +91,10 @@ for set_number in range(300,393):
 
         card_url = card_url.replace('reg', 'big')
         card_name = card_text.split(' - ')[0]
-        card_name = card_name.replace('/', '#')
+        #card_name = card_name.replace('/', '|')
+        #card_name = card_name.replace(':', '#')
+        for i in [':', '(', ')', '//', '/', '?','!', '|']:
+            card_name = card_name.replace(i, '')
         #print('found card', card_name)
         set_name = card_text.split(' - ')[1]
         set_acronym = card_url.split('/')[5]

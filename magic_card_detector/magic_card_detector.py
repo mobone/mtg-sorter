@@ -26,7 +26,7 @@ from PIL import Image as PILImage
 
 import imagehash
 import cv2
-
+import multitasking
 
 def order_polygon_points(x, y):
     """
@@ -635,7 +635,7 @@ class MagicCardDetector:
         Pre-calculates the hashes of the images.
         """
         print('Reading images from ' + str(path))
-        print('...', end=' ')
+        
 
         filenames = glob.glob(path + '*.png')
         filenames_jpg = glob.glob(path + '*.jpg')
@@ -650,18 +650,26 @@ class MagicCardDetector:
 
             #filename = filename.replace('û','')
             #import re
-            special_characters = "àûö"
-            if any(c in special_characters for c in filename):
-                continue
+            #special_characters = "àûöáú"
+            #if any(c in special_characters for c in filename):
+            #    continue
 
 
-            if i == 1000:
+            if i == 2000:
                 print('opening image', filename)
                 i = 0
             i = i + 1
-            img = cv2.imread(filename)
+            
             img_name = filename.split('\\')[1]
-            #img_name = re.sub('[^A-Za-z0-9 -.\']+', '', img_name)
+            img_name = img_name.replace('.png','')
+            import re
+            img_name_before = img_name
+            img_name = re.sub('[^A-Za-z0-9 -.\'?!]+', '', img_name)
+            if img_name_before != img_name:
+                print('\t\tbroken\t', img_name_before, img_name)
+                #input()
+                continue
+            img = cv2.imread(filename)
             #img_name = img_name.replace('.png','')
             #print(img_name)
             #input()
@@ -906,7 +914,7 @@ class MagicCardDetector:
                 if (not test_image.may_contain_more_cards() or
                         len(test_image.return_recognized()) > 5):
                     break
-
+            #multitasking.wait_for_tasks()
             print('Plotting and saving the results...')
             test_image.plot_image_with_recognized(self.output_path, self.visual)
             print('Done.')
@@ -914,6 +922,7 @@ class MagicCardDetector:
             
         print('Recognition done.')
 
+    #@multitasking.task
     def recognize_cards_in_image(self, test_image, contouring_mode):
         """
         Tries to recognize cards from the image specified.
