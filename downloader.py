@@ -47,8 +47,8 @@ def download_image(set_acronym, card_name, card_url):
     try:
         original_filesize = urllib.request.urlopen(card_url).length
         while downloaded_size != original_filesize:
-            if downloaded_size != original_filesize:
-                print('caught mismatch', card_url, downloaded_size, original_filesize)
+            
+            print('caught mismatch', card_url, downloaded_size, original_filesize)
             
             urllib.request.urlretrieve(card_url, "./magic_card_detector/cards/%s - %s.png" % (set_acronym, card_name))
             
