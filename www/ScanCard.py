@@ -49,3 +49,5 @@ def scan_card():
     img = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
     cv2.imwrite("current_scan.jpg", img)
     camera.close()
+
+scan_card()
