@@ -46,5 +46,5 @@ if __name__ == "__main__":
         if focusState.isFinish():
             focusState.reset()
             doFocus(camera, focuser, focusState)
-            cv2.imwrite("current_scan.jpg", camera.getFrame())
+            cv2.imwrite("/current_scan.jpg", camera.getFrame())
             exit()
