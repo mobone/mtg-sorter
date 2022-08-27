@@ -3,6 +3,7 @@ Module for detecting and recognizing Magic: the Gathering cards from an image.
 author: Timo Ikonen
 email: timo.ikonen (at) iki.fi
 """
+from numba import jit, cuda
 
 import glob
 import os
@@ -843,6 +844,7 @@ class MagicCardDetector:
                 pass
         return diff
 
+    #@jit(target_backend='cuda', nopython=True)
     def phash_compare(self, im_seg):
         """
         Runs perceptive hash comparison between given image and
@@ -853,7 +855,7 @@ class MagicCardDetector:
         is_recognized = False
         recognition_score = 0.
         rotations = np.array([0., 90., 180., 270.])
-
+        rotations = np.array([0.])
         d_0_dist = np.zeros(len(rotations))
         d_0 = np.zeros((len(self.reference_images), len(rotations)))
         for j, rot in enumerate(rotations):
@@ -888,7 +890,7 @@ class MagicCardDetector:
         Wrapper for different segmented image recognition algorithms.
         """
         return self.phash_compare(image_segment)
-
+    
     def run_recognition(self, image_index=None):
         """
         The top-level image recognition method.
@@ -905,7 +907,7 @@ class MagicCardDetector:
             test_image = self.test_images[i]
             print('Accessing image ' + test_image.name)
             
-            if test_image.name != 'current_scan.jpg':
+            if 'result' in test_image.name:
                 continue
             #input()
             if self.visual:
@@ -932,6 +934,7 @@ class MagicCardDetector:
         print('Recognition done.')
 
     #@multitasking.task
+    
     def recognize_cards_in_image(self, test_image, contouring_mode):
         """
         Tries to recognize cards from the image specified.
@@ -1000,6 +1003,7 @@ def load():
     #card_detector.read_and_adjust_test_images('./static/')
 
     #card_detector.run_recognition()
+
 
 def run():
     global card_detector
