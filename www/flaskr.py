@@ -15,7 +15,7 @@ def scan_card():
 
 @app.route('/display-current')
 def display_current():
-    with open('current_scan.jpg', 'rb') as f:
+    with open('/static/current_scan.jpg', 'rb') as f:
         image_binary = f.read()
         response = make_response(base64.b64encode(image_binary))
         

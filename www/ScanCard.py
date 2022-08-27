@@ -48,7 +48,7 @@ def scan_card():
             exit_ = True
     frame = camera.getFrame()
     img = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
-    cv2.imwrite("/static/current_scan.jpg", img)
+    cv2.imwrite("./static/current_scan.jpg", img)
     print('wrote file')
     camera.close()
 
