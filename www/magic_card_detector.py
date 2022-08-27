@@ -891,6 +891,8 @@ class MagicCardDetector:
         The top-level image recognition method.
         Wrapper for switching to different algorithms and re-trying.
         """
+        print('running recognition')
+        input()
         if image_index is None:
             image_index = range(len(self.test_images))
         elif not isinstance(image_index, list):
@@ -899,7 +901,10 @@ class MagicCardDetector:
             
             test_image = self.test_images[i]
             print('Accessing image ' + test_image.name)
-
+            
+            if test_image.name != 'current_scan.jpg':
+                continue
+            input()
             if self.visual:
                 print('Original image')
                 plt.imshow(cv2.cvtColor(test_image.original,
@@ -910,6 +915,7 @@ class MagicCardDetector:
 
             for alg in alg_list:
                 self.recognize_cards_in_image(test_image, alg)
+                
                 test_image.discard_unrecognized_candidates()
                 if (not test_image.may_contain_more_cards() or
                         len(test_image.return_recognized()) > 25):
@@ -1033,3 +1039,5 @@ def main():
             profiler, stream=profiler_stream).sort_stats(sortby)
         profiler_stats.print_stats(20)
         print(profiler_stream.getvalue())
+if __name__ == '__main__':
+    main()
