@@ -974,34 +974,7 @@ class MagicCardDetector:
         test_image.mark_fragments()
         print('Done.')
 
-
-def main():
-    """
-    Python MTG Card Detector.
-    Can be used also purely through the defined classes.
-    """
-
-    '''
-    # Add command line parser
-    parser = argparse.ArgumentParser(
-        description='Recognize Magic: the Gathering cards from an image. ' +
-                     'Author: Timo Ikonen, timo.ikonen(at)iki.fi')
-
-    parser.add_argument('input_path',
-                        help='path containing the images to be analyzed')
-    parser.add_argument('output_path',
-                        help='output path for the results')
-    parser.add_argument('--phash', default='alpha_reference_phash.dat',
-                        help='pre-calculated phash reference file')
-    parser.add_argument('--visual', default=False, action='store_true',
-                        help='run with visualization')
-    parser.add_argument('--verbose', default=False, action='store_true',
-                        help='run in verbose mode')
-
-    args = parser.parse_args()
-    '''
-
-    
+def load():
     # Create the output path
     output_path = './static/'.rstrip('/')
     if not os.path.exists(output_path):
@@ -1019,25 +992,7 @@ def main():
     #     '../../MTG/Card_Images/LEA/')
     card_detector.read_prehashed_reference_data('alpha_reference_phash.dat')
     card_detector.read_and_adjust_test_images('./static/')
+    print('card detector loaded')
 
-    if do_profile:
-        # Start up the profiler.
-        profiler = cProfile.Profile()
-        profiler.enable()
 
-    # Run the card detection and recognition.
-
-    card_detector.run_recognition()
-
-    if do_profile:
-        # Stop profiling and organize and print profiling results.
-        profiler.disable()
-        profiler.dump_stats('magic_card_detector.prof')
-        profiler_stream = io.StringIO()
-        sortby = pstats.SortKey.CUMULATIVE
-        profiler_stats = pstats.Stats(
-            profiler, stream=profiler_stream).sort_stats(sortby)
-        profiler_stats.print_stats(20)
-        print(profiler_stream.getvalue())
-if __name__ == '__main__':
-    main()
+load()
