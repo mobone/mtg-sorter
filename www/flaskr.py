@@ -16,9 +16,11 @@ def scan_card():
 
 
 @app.route('/', methods=['GET', 'POST'])
-def hello():
+def index():
     if request.method == 'POST':
         print('got post form')
+        scan_card()
+        print('card scanned')
     return render_template('index.html')
 
 if __name__ == '__main__':
