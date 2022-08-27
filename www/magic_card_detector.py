@@ -996,9 +996,12 @@ def load():
     card_detector.read_prehashed_reference_data('alpha_reference_phash.dat')
     
     print('card detector loaded')
+    card_detector.read_and_adjust_test_images('./static/')
+
+    card_detector.run_recognition()
 
 def run():
     card_detector.read_and_adjust_test_images('./static/')
 
-
+    card_detector.run_recognition()
 load()
