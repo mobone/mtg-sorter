@@ -912,7 +912,7 @@ class MagicCardDetector:
                 self.recognize_cards_in_image(test_image, alg)
                 test_image.discard_unrecognized_candidates()
                 if (not test_image.may_contain_more_cards() or
-                        len(test_image.return_recognized()) > 5):
+                        len(test_image.return_recognized()) > 25):
                     break
             #multitasking.wait_for_tasks()
             print('Plotting and saving the results...')
