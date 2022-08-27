@@ -31,7 +31,7 @@ def index():
         print('got post form')
         scan_card()
         print('card scanned')
-        magic_card_detector.run_recognition()
+        magic_card_detector.run()
         
     return render_template('index.html')
 

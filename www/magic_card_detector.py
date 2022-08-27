@@ -28,6 +28,8 @@ import imagehash
 import cv2
 import multitasking
 
+card_detector = None
+
 def order_polygon_points(x, y):
     """
     Orders polygon points into a counterclockwise order.
@@ -981,6 +983,7 @@ def load():
         os.mkdir(output_path)
 
     # Instantiate the detector
+    global card_detector
     card_detector = MagicCardDetector(output_path)
 
     do_profile = False
@@ -991,8 +994,11 @@ def load():
     # card_detector.read_and_adjust_reference_images(
     #     '../../MTG/Card_Images/LEA/')
     card_detector.read_prehashed_reference_data('alpha_reference_phash.dat')
-    card_detector.read_and_adjust_test_images('./static/')
+    
     print('card detector loaded')
+
+def run():
+    card_detector.read_and_adjust_test_images('./static/')
 
 
 load()
