@@ -36,15 +36,6 @@ if __name__ == "__main__":
     focusState.verbose = args.verbose
     doFocus(camera, focuser, focusState)
 
-    start = time.time()
-    frame_count = 0
-
-    while not exit_:
-        frame = camera.getFrame()
-        img = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
-
-        if focusState.isFinish():
-            focusState.reset()
-            doFocus(camera, focuser, focusState)
-            cv2.imwrite("/current_scan.jpg", camera.getFrame())
-            exit()
+    frame = camera.getFrame()
+    img = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+    cv2.imwrite("current_scan.jpg", img)
