@@ -892,7 +892,7 @@ class MagicCardDetector:
         Wrapper for switching to different algorithms and re-trying.
         """
         print('running recognition')
-        input()
+        #input()
         if image_index is None:
             image_index = range(len(self.test_images))
         elif not isinstance(image_index, list):
@@ -904,7 +904,7 @@ class MagicCardDetector:
             
             if test_image.name != 'current_scan.jpg':
                 continue
-            input()
+            #input()
             if self.visual:
                 print('Original image')
                 plt.imshow(cv2.cvtColor(test_image.original,
