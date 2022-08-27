@@ -997,7 +997,7 @@ def main():
 
     
     # Create the output path
-    output_path = './static/'.output_path.rstrip('/')
+    output_path = './static/'.rstrip('/')
     if not os.path.exists(output_path):
         os.mkdir(output_path)
 
