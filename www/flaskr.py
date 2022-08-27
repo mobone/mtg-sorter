@@ -1,16 +1,6 @@
 from flask import Flask, render_template, request, url_for, flash, redirect
 import os
-
-import cv2 #sudo apt-get install python-opencv
-import numpy as py
-import os
-import sys
-import time
-import argparse
-from RpiCamera import Camera
-from Focuser import Focuser
-# from AutoFocus import AutoFocus
-
+import ScanCard
 
 
 app = Flask(__name__)
@@ -20,9 +10,9 @@ app.config['SECRET_KEY'] = os.urandom(24).hex()
 
 @app.route('/scan-card')
 def scan_card():
-    camera = Camera()
-    #focuser = Focuser(10)
-    cv2.imwrite("current_card.jpg"), camera.getFrame()
+    ScanCard.scan_card()
+    return "card scanned"
+    
 
 
 @app.route('/', methods=['GET', 'POST'])
