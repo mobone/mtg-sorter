@@ -855,7 +855,7 @@ class MagicCardDetector:
         is_recognized = False
         recognition_score = 0.
         rotations = np.array([0., 90., 180., 270.])
-        rotations = np.array([0.])
+        rotations = np.array([90.])
         d_0_dist = np.zeros(len(rotations))
         d_0 = np.zeros((len(self.reference_images), len(rotations)))
         for j, rot in enumerate(rotations):
