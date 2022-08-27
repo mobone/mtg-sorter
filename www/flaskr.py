@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, url_for, flash, redirect, mak
 import os
 import ScanCard
 import base64
-
+import magic_card_detector
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.urandom(24).hex()
@@ -31,6 +31,7 @@ def index():
         print('got post form')
         scan_card()
         print('card scanned')
+        magic_card_detector.main()
     return render_template('index.html')
 
 if __name__ == '__main__':

@@ -975,6 +975,7 @@ def main():
     Can be used also purely through the defined classes.
     """
 
+    '''
     # Add command line parser
     parser = argparse.ArgumentParser(
         description='Recognize Magic: the Gathering cards from an image. ' +
@@ -992,9 +993,11 @@ def main():
                         help='run in verbose mode')
 
     args = parser.parse_args()
+    '''
 
+    
     # Create the output path
-    output_path = args.output_path.rstrip('/')
+    output_path = './static/'.output_path.rstrip('/')
     if not os.path.exists(output_path):
         os.mkdir(output_path)
 
@@ -1002,14 +1005,14 @@ def main():
     card_detector = MagicCardDetector(output_path)
 
     do_profile = False
-    card_detector.visual = args.visual
-    card_detector.verbose = args.verbose
+    card_detector.visual = False
+    card_detector.verbose = False
 
     # Read the reference and test data sets
     # card_detector.read_and_adjust_reference_images(
     #     '../../MTG/Card_Images/LEA/')
-    card_detector.read_prehashed_reference_data(args.phash)
-    card_detector.read_and_adjust_test_images(args.input_path)
+    card_detector.read_prehashed_reference_data('alpha_reference_phash.dat')
+    card_detector.read_and_adjust_test_images('./static/')
 
     if do_profile:
         # Start up the profiler.
@@ -1030,11 +1033,3 @@ def main():
             profiler, stream=profiler_stream).sort_stats(sortby)
         profiler_stats.print_stats(20)
         print(profiler_stream.getvalue())
-
-
-if __name__ == "__main__":
-    import time
-    start = time.time()
-    main()
-    end = time.time()
-    print(end-start)
