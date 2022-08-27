@@ -28,7 +28,7 @@ def parse_cmdline():
 if __name__ == "__main__":
     args = parse_cmdline()
     camera = Camera()
-    #camera.start_preview(False)
+    camera.start_preview(False)
     focuser = Focuser(args.i2c_bus)
     focuser.verbose = args.verbose
 
@@ -36,8 +36,14 @@ if __name__ == "__main__":
     focusState.verbose = args.verbose
     doFocus(camera, focuser, focusState)
 
-    frame = camera.getFrame()
-    img = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
-    #cv2.imwrite("current_scan.jpg", img)
-    import os
-    cv2.imwrite(os.path.join(os.path.expanduser('~'),'Desktop','current_scan.jpg'), img)
+    start = time.time()
+    frame_count = 0
+
+    while not exit_:
+        frame = camera.getFrame()
+        img = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+
+        if focusState.isFinish():
+            exit_ = True
+    cv2.imwrite("current_scan.jpg", camera.getFrame())
+    camera.close()
