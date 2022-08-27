@@ -26,6 +26,7 @@ def parse_cmdline():
     return parser.parse_args()
 
 def scan_card():
+    exit_ = False
     #args = parse_cmdline()
     camera = Camera()
     camera.start_preview(False)
