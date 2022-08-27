@@ -3,7 +3,7 @@ Module for detecting and recognizing Magic: the Gathering cards from an image.
 author: Timo Ikonen
 email: timo.ikonen (at) iki.fi
 """
-from numba import jit, cuda
+#from numba import jit, cuda
 
 import glob
 import os
