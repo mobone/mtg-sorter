@@ -27,7 +27,7 @@ from PIL import Image as PILImage
 import imagehash
 import cv2
 import multitasking
-
+import time
 card_detector = None
 
 def order_polygon_points(x, y):
@@ -1003,9 +1003,12 @@ def load():
 
 def run():
     global card_detector
+    start = time.time()
     card_detector.read_and_adjust_test_images('./static/')
-    print('running recognition!')
+    #print('running recognition!')
     card_detector.run_recognition()
+    end = time.time()
+    print('completed in ', end - start, 'seconds')
 
 if __name__ == '__main__':
     load()
