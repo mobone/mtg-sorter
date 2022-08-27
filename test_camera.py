@@ -38,4 +38,6 @@ if __name__ == "__main__":
 
     frame = camera.getFrame()
     img = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
-    cv2.imwrite("current_scan.jpg", img)
+    #cv2.imwrite("current_scan.jpg", img)
+    import os
+    cv2.imwrite(os.path.join(os.path.expanduser('~'),'Desktop','current_scan.jpg'), img)
