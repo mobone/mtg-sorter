@@ -690,6 +690,7 @@ class MagicCardDetector:
         filenames_jpg = glob.glob(path + '*.png')
         #print('filenames here:', filenames)
         filenames = filenames + filenames_jpg
+        
         for filename in filenames:
             img = cv2.imread(filename)
             if min(img.shape[0], img.shape[1]) > maxsize:
@@ -1005,4 +1006,6 @@ def run():
     card_detector.read_and_adjust_test_images('./static/')
 
     card_detector.run_recognition()
-load()
+
+if __name__ == '__main__':
+    load()

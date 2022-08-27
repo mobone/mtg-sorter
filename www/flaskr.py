@@ -8,6 +8,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(24).hex()
 
 
+magic_card_detector.load()
+
 @app.route('/scan-card')
 def scan_card():
     ScanCard.scan_card()
