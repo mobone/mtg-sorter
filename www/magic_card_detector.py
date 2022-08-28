@@ -632,6 +632,8 @@ class MagicCardDetector:
         with open(path, 'rb') as filename:
             hashed_list = pickle.load(filename)
         for ref_im in hashed_list:
+            if 'Kazandu Tuskcaller' not in ref_im.name:
+                continue
             self.reference_images.append(
                 ReferenceImage(ref_im.name, None, self.clahe, ref_im.phash))
         print('Done.')

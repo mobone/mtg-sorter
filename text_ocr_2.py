@@ -28,8 +28,10 @@ for img_filename in file_names:
     print(img_filename)
     
     dim = (img.shape[1], img.shape[0])
-
-    img = img[0:700, 0:dim[0]]
+    print(dim)
+    img = img[0:300, 0:dim[0]]
+    #cv2.imshow('asdf', img)
+    
     img = get_grayscale(img)
     #thresh = cv2.threshold(img, 0, 255, cv2.THRESH_OTSU + cv2.THRESH_BINARY_INV)[1]
     #thresh = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
@@ -43,13 +45,14 @@ for img_filename in file_names:
     text_2 = pytesseract.image_to_string(result, config=custom_config)
     max_match = 0
     for text, text_type in [(text_1, 'text_1'),(text_2, 'text_2')]:
+        print(text)
         if text is None or text == '':
             continue
         print('----------------')
         print(text_type)
         print(text)
         print('----------------')
-        input()
+        
         for key, row in df.iterrows():
 
             ratio = fuzz.ratio(text, row.values[0])

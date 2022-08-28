@@ -20,7 +20,7 @@ dir_path = './cards/'
 file_names = list(os.walk('./test_cards/'))[0][2]
 print(file_names)
 start = time.time()
-for img_filename in file_names:
+def read_text():
     img = cv2.imread('./test_cards/'+img_filename)
 
     print('====================')
@@ -94,5 +94,6 @@ for img_filename in file_names:
     cv2.imshow('img', img)
     cv2.waitKey(0)
     '''
-end = time.time()
-print( (end-start) / len(file_names))
+    return best_text
+#end = time.time()
+#print( (end-start) / len(file_names))
