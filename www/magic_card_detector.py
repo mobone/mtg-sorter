@@ -867,7 +867,7 @@ class MagicCardDetector:
         d_0_dist = np.zeros(len(rotations))
         this_reference_images = []
         for img in self.reference_images:
-            if 'tusk' in img.name.lower():
+            if 'tuskcaller' in img.name.lower():
                 this_reference_images.append(img)
 
         self.reference_images = this_reference_images
