@@ -632,8 +632,8 @@ class MagicCardDetector:
         with open(path, 'rb') as filename:
             hashed_list = pickle.load(filename)
         for ref_im in hashed_list:
-            #if 'tusk' not in ref_im.name.lower():
-                #continue
+            if 'tusk' not in ref_im.name.lower():
+                continue
             self.reference_images.append(
                 ReferenceImage(ref_im.name, None, self.clahe, ref_im.phash))
         print('Done.')
@@ -865,15 +865,14 @@ class MagicCardDetector:
         #rotations = np.array([0., 90., 180., 270.])
         rotations = np.array([0.])
         d_0_dist = np.zeros(len(rotations))
-        '''
-        meow
-        #this_reference_images = []
-        #for img in self.reference_images:
-            #if 'tuskcaller' in img.name.lower():
-            #    this_reference_images.append(img)
+        
+        this_reference_images = []
+        for img in self.reference_images:
+            if 'tusk' in img.name.lower():
+                this_reference_images.append(img)
 
-        #self.reference_images = this_reference_images
-        '''
+        self.reference_images = this_reference_images
+        
             
         d_0 = np.zeros((len(self.reference_images), len(rotations)))
         for j, rot in enumerate(rotations):
