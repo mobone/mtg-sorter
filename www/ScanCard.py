@@ -15,6 +15,10 @@ def sigint_handler(signum, frame):
 signal.signal(signal.SIGINT, sigint_handler)
 signal.signal(signal.SIGTERM, sigint_handler)
 
+camera = Camera()
+camera.start_preview(False)
+focuser = Focuser(10)
+
 def parse_cmdline():
     parser = argparse.ArgumentParser(description='Arducam IMX519 Autofocus Demo.')
 
@@ -28,9 +32,7 @@ def parse_cmdline():
 def scan_card():
     exit_ = False
     #args = parse_cmdline()
-    camera = Camera()
-    camera.start_preview(False)
-    focuser = Focuser(10)
+    
     #focuser.verbose = args.verbose
 
     focusState = FocusState()
@@ -38,7 +40,7 @@ def scan_card():
     doFocus(camera, focuser, focusState)
 
     while focusState.isFinish()==False:
-        time.sleep(.1)
+        time.sleep(.01)
         
     time.sleep(.1)
     frame = camera.getFrame()
@@ -46,5 +48,7 @@ def scan_card():
     img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)
     cv2.imwrite("./static/current_scan.jpg", img)
     
-    camera.close()
+    #camera.close()
 
+if __name__ == '__main__':
+    pass

@@ -31,10 +31,11 @@ def display_current():
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
+        start = time.time()
         print('got post form')
         scan_card()
         print('card scanned')
-        start = time.time()
+        
         magic_card_detector.load()
         magic_card_detector.run()
         end = time.time()
