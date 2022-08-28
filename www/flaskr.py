@@ -10,6 +10,7 @@ app.config['SECRET_KEY'] = os.urandom(24).hex()
 
 
 
+magic_card_detector.load()
 
 @app.route('/scan-card')
 def scan_card():
@@ -36,7 +37,7 @@ def index():
         scan_card()
         print('card scanned')
         
-        magic_card_detector.load()
+        #magic_card_detector.load()
         magic_card_detector.run()
         end = time.time()
         print("full run took", end - start, 'seconds')
