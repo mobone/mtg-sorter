@@ -34,7 +34,7 @@ def index():
     if request.method == 'POST':
 
         start = time.time()
-        magic_card_detector.MagicCardDetector.test_images = []
+        
         print('got post form')
         scan_card()
         print('card scanned')
