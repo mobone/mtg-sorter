@@ -865,12 +865,15 @@ class MagicCardDetector:
         #rotations = np.array([0., 90., 180., 270.])
         rotations = np.array([0.])
         d_0_dist = np.zeros(len(rotations))
-        this_reference_images = []
-        for img in self.reference_images:
-            if 'tuskcaller' in img.name.lower():
-                this_reference_images.append(img)
+        '''
+        meow
+        #this_reference_images = []
+        #for img in self.reference_images:
+            #if 'tuskcaller' in img.name.lower():
+            #    this_reference_images.append(img)
 
-        self.reference_images = this_reference_images
+        #self.reference_images = this_reference_images
+        '''
             
         d_0 = np.zeros((len(self.reference_images), len(rotations)))
         for j, rot in enumerate(rotations):
