@@ -551,7 +551,7 @@ class TestImage:
                   '  - with score ' +
                   str(card.recognition_score))
         return recognized_list
-        
+
     def return_recognized(self):
         """
         Returns a list of recognized and non-fragment card candidates.
@@ -605,6 +605,9 @@ class MagicCardDetector:
 
         self.clahe = cv2.createCLAHE(clipLimit=2.0,
                                      tileGridSize=(8, 8))
+
+    def return_test_images(self):
+        return self.test_images
 
     def export_reference_data(self, path):
         """
