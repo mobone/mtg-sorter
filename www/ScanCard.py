@@ -37,12 +37,14 @@ def scan_card():
 
     focusState = FocusState()
     #focusState.verbose = args.verbose
+    print('focusing')
     doFocus(camera, focuser, focusState)
 
     while focusState.isFinish()==False:
         time.sleep(.01)
         
     time.sleep(.1)
+    print('focused')
     frame = camera.getFrame()
     img = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
     img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)
