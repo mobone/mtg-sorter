@@ -37,7 +37,7 @@ def index():
         #recognized = magic_card_detector.return_recognized()
         #print(recognized)
         for image in magic_card_detector.card_detector.test_images:
-            print(image.return_recognized())
+            print(image.return_recognized()[0].name)
         
         
     return render_template('index.html')
