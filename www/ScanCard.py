@@ -43,7 +43,7 @@ def scan_card():
     while focusState.isFinish()==False:
         time.sleep(.1)
         
-    time.sleep(.3)
+    #time.sleep(.3)
     print('focused')
     frame = camera.getFrame()
     img = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
