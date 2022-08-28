@@ -10,7 +10,6 @@ app.config['SECRET_KEY'] = os.urandom(24).hex()
 
 
 
-magic_card_detector.load()
 
 @app.route('/scan-card')
 def scan_card():
@@ -32,16 +31,13 @@ def display_current():
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-
         start = time.time()
-        
         print('got post form')
         scan_card()
         print('card scanned')
         
-        #magic_card_detector.load()
+        magic_card_detector.load()
         magic_card_detector.run()
-        
         end = time.time()
         print("full run took", end - start, 'seconds')
         #ecognized = magic_card_detector.return_recognized()
