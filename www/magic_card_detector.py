@@ -694,9 +694,9 @@ class MagicCardDetector:
         print('Reading images from >' + str(path))
         print('...', end=' ')
         filenames = glob.glob(path + '*.jpg')
-        filenames_jpg = glob.glob(path + '*.png')
+        #filenames_jpg = glob.glob(path + '*.png')
         #print('filenames here:', filenames)
-        filenames = filenames + filenames_jpg
+        #filenames = filenames + filenames_jpg
         
         for filename in filenames:
             if 'current_scan' not in filename:
