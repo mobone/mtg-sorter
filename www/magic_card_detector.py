@@ -550,7 +550,8 @@ class TestImage:
             print(card.name +
                   '  - with score ' +
                   str(card.recognition_score))
-
+        return recognized_list
+        
     def return_recognized(self):
         """
         Returns a list of recognized and non-fragment card candidates.
