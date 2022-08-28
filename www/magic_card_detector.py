@@ -697,6 +697,8 @@ class MagicCardDetector:
         filenames = filenames + filenames_jpg
         
         for filename in filenames:
+            if 'current_scan' not in filename:
+                continue
             img = cv2.imread(filename)
             if min(img.shape[0], img.shape[1]) > maxsize:
                 scalef = maxsize / min(img.shape[0], img.shape[1])
@@ -923,7 +925,7 @@ class MagicCardDetector:
                 plt.show()
 
             alg_list = ['adaptive', 'rgb']
-            alg_list = ['adaptive']
+            alg_list = ['rgb']
 
             for alg in alg_list:
                 self.recognize_cards_in_image(test_image, alg)
