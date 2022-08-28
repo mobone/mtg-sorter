@@ -37,15 +37,13 @@ def scan_card():
     #focusState.verbose = args.verbose
     doFocus(camera, focuser, focusState)
 
-    start = time.time()
-    frame_count = 0
-
     while not exit_:
-        frame = camera.getFrame()
-        img = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+        #frame = camera.getFrame()
+        #img = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
 
         if focusState.isFinish():
             exit_ = True
+        time.sleep(.01)
     #time.sleep(.1)
     frame = camera.getFrame()
     img = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
