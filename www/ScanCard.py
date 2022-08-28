@@ -46,6 +46,7 @@ def scan_card():
 
         if focusState.isFinish():
             exit_ = True
+    time.sleep(.1)
     frame = camera.getFrame()
     img = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
     img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)

@@ -942,8 +942,7 @@ class MagicCardDetector:
             
         print('Recognition done.')
 
-    #@multitasking.task
-    
+
     def recognize_cards_in_image(self, test_image, contouring_mode):
         """
         Tries to recognize cards from the image specified.
