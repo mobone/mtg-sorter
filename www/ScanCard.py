@@ -41,7 +41,7 @@ def scan_card():
     doFocus(camera, focuser, focusState)
 
     while focusState.isFinish()==False:
-        time.sleep(.1)
+        time.sleep(.2)
         
     #time.sleep(.2)
     print('focused')
