@@ -930,7 +930,7 @@ class MagicCardDetector:
                     break
             #multitasking.wait_for_tasks()
             print('Plotting and saving the results...')
-            test_image.plot_image_with_recognized(self.output_path, self.visual)
+            #test_image.plot_image_with_recognized(self.output_path, self.visual)
             print('Done.')
             test_image.print_recognized()
             
@@ -1014,6 +1014,7 @@ def run():
     card_detector.read_and_adjust_test_images('./static/')
     #print('running recognition!')
     card_detector.run_recognition()
+    
     end = time.time()
     print('completed in ', end - start, 'seconds')
 
