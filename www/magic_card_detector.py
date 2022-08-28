@@ -697,7 +697,8 @@ class MagicCardDetector:
         #filenames_jpg = glob.glob(path + '*.png')
         #print('filenames here:', filenames)
         #filenames = filenames + filenames_jpg
-        
+        print('\t\t\theres the length', len(filenames))
+
         for filename in filenames:
             if 'current_scan' not in filename:
                 continue
