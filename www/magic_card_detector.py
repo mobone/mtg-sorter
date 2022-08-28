@@ -925,7 +925,7 @@ class MagicCardDetector:
                 plt.show()
 
             alg_list = ['adaptive', 'rgb']
-            alg_list = ['rgb']
+            #alg_list = ['rgb']
 
             for alg in alg_list:
                 self.recognize_cards_in_image(test_image, alg)
