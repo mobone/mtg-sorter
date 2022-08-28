@@ -3,12 +3,13 @@ import os
 import ScanCard
 import base64
 import magic_card_detector
+import time
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.urandom(24).hex()
 
 
-magic_card_detector.load()
+
 
 @app.route('/scan-card')
 def scan_card():
@@ -33,7 +34,11 @@ def index():
         print('got post form')
         scan_card()
         print('card scanned')
+        start = time.time()
+        magic_card_detector.load()
         magic_card_detector.run()
+        end = time.time()
+        print("full run took", end - start, 'seconds')
         #ecognized = magic_card_detector.return_recognized()
         #print(recognized)
         #for image in magic_card_detector.card_detector.test_images:
