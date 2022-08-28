@@ -855,7 +855,7 @@ class MagicCardDetector:
         is_recognized = False
         recognition_score = 0.
         rotations = np.array([0., 90., 180., 270.])
-        rotations = np.array([90.])
+        #rotations = np.array([90.])
         d_0_dist = np.zeros(len(rotations))
         d_0 = np.zeros((len(self.reference_images), len(rotations)))
         for j, rot in enumerate(rotations):
@@ -882,7 +882,9 @@ class MagicCardDetector:
                     .name.split('.png')[0]
                 is_recognized = True
                 recognition_score = d_0_dist[j] / self.hash_separation_thr
+                
                 break
+        print('\n\n ROTATION USED: ', rot)
         return (is_recognized, recognition_score, card_name)
 
     def recognize_segment(self, image_segment):
@@ -917,6 +919,7 @@ class MagicCardDetector:
                 plt.show()
 
             alg_list = ['adaptive', 'rgb']
+            #alg_list = ['rgb']
 
             for alg in alg_list:
                 self.recognize_cards_in_image(test_image, alg)
@@ -927,7 +930,7 @@ class MagicCardDetector:
                     break
             #multitasking.wait_for_tasks()
             print('Plotting and saving the results...')
-            #test_image.plot_image_with_recognized(self.output_path, self.visual)
+            test_image.plot_image_with_recognized(self.output_path, self.visual)
             print('Done.')
             test_image.print_recognized()
             

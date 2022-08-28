@@ -34,6 +34,8 @@ def index():
         scan_card()
         print('card scanned')
         magic_card_detector.run()
+        recognized = magic_card_detector.return_recognized()
+        print(recognized)
         
     return render_template('index.html')
 
