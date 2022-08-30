@@ -62,8 +62,8 @@ def get_text():
     best_text_type = None
     best_text = None
     
-    for text, text_type in [(text_original_scaled, 'original_scaled'),(text_gray_img, 'gray'), (text_gray_img_scaled, 'gray_scaled')]:
-    #for text, text_type in [(text_gray_img, 'gray')]:
+    #for text, text_type in [(text_original_scaled, 'original_scaled'),(text_gray_img, 'gray'), (text_gray_img_scaled, 'gray_scaled')]:
+    for text, text_type in [(text_gray_img, 'gray')]:
         print(text)
         if text is None or text == '':
             continue
