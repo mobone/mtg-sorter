@@ -32,6 +32,8 @@ import time
 
 best_text_recognized = None
 card_detector = None
+card_detected = None
+card_detected_score = None
 
 def order_polygon_points(x, y):
     """
@@ -638,6 +640,7 @@ class MagicCardDetector:
         print('...', end=' ')
         with open(path, 'rb') as filename:
             hashed_list = pickle.load(filename)
+        global best_text_recognized
         for ref_im in hashed_list:
             
 
@@ -876,6 +879,7 @@ class MagicCardDetector:
         d_0_dist = np.zeros(len(rotations))
         
         this_reference_images = []
+        global best_text_recognized
         for img in self.reference_images:
             if best_text_recognized is not None and best_text_recognized not in img.name.lower():
                 continue

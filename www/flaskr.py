@@ -100,6 +100,7 @@ def display_current():
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    global recognized_cards
     if request.method == 'POST':
         start = time.time()
         print('got post form')
