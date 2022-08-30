@@ -48,14 +48,14 @@ def get_text():
     gray_img = get_grayscale(img)
     opening_img = opening(gray_img)
 
-    #gray_img_scaled = get_grayscale(img_scaled)
-    #opening_img_scaled = opening(gray_img_scaled)
+    gray_img_scaled = get_grayscale(img_scaled)
+    opening_img_scaled = opening(gray_img_scaled)
     
     custom_config = r'--oem 3 --psm 4'
     
     text_gray_img = pytesseract.image_to_string(gray_img, config=custom_config)
-    #text_original_scaled = pytesseract.image_to_string(opening_img_scaled, config=custom_config)
-    #text_gray_img_scaled = pytesseract.image_to_string(gray_img_scaled, config=custom_config)
+    text_original_scaled = pytesseract.image_to_string(opening_img_scaled, config=custom_config)
+    text_gray_img_scaled = pytesseract.image_to_string(gray_img_scaled, config=custom_config)
 
     
     max_score = 0
@@ -63,8 +63,8 @@ def get_text():
     best_text_type = None
     best_text = None
     
-    #for text, text_type in [(text_original_scaled, 'original_scaled'),(text_gray_img, 'gray'), (text_gray_img_scaled, 'gray_scaled')]:
-    for text, text_type in [(text_gray_img, 'gray')]:
+    for text, text_type in [(text_original_scaled, 'original_scaled'),(text_gray_img, 'gray'), (text_gray_img_scaled, 'gray_scaled')]:
+    #for text, text_type in [(text_gray_img, 'gray')]:
         print(text)
         if text is None or text == '':
             continue
