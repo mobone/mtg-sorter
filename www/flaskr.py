@@ -38,15 +38,15 @@ def get_text():
 
     #cv2.imwrite('/home/admn/Documents/mtg-sorter/cropped.jpg', img)
     
-    #scale_percent = 50 # percent of original size
-    #width = int(img.shape[1] * scale_percent / 100)
-    #height = int(img.shape[0] * scale_percent / 100)
-    #dim = (width, height)
+    scale_percent = 50 # percent of original size
+    width = int(img.shape[1] * scale_percent / 100)
+    height = int(img.shape[0] * scale_percent / 100)
+    dim = (width, height)
 
-    #img_scaled = cv2.resize(img, dim, interpolation = cv2.INTER_AREA)
+    img_scaled = cv2.resize(img, dim, interpolation = cv2.INTER_AREA)
 
     gray_img = get_grayscale(img)
-    #opening_img = opening(gray_img)
+    opening_img = opening(gray_img)
 
     #gray_img_scaled = get_grayscale(img_scaled)
     #opening_img_scaled = opening(gray_img_scaled)
