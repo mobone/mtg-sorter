@@ -20,20 +20,22 @@ img = cv2.imread('./static/current_scan.jpg')
 
     
 dim = (img.shape[1], img.shape[0])
+top_img = img[0:300, 0:dim[0]]
+bottom_img = img[dim[1]-150:dim[1], 0:dim[0]]
 
-img = img[0:200, 0:dim[0]]
+#cv2.imwrite('./static/cropped.jpg', img)
 
-#cv2.imwrite('/home/admn/Documents/mtg-sorter/cropped.jpg', img)
-
-scale_percent = 50 # percent of original size
+scale_percent = 150 # percent of original size
 width = int(img.shape[1] * scale_percent / 100)
 height = int(img.shape[0] * scale_percent / 100)
 dim = (width, height)
 
-img_scaled = cv2.resize(img, dim, interpolation = cv2.INTER_AREA)
+top_img_scaled = cv2.resize(top_img, dim, interpolation = cv2.INTER_AREA)
+bottom_img_scaled = cv2.resize(bottom_img, dim, interpolation = cv2.INTER_AREA)
 
-gray_img = get_grayscale(img)
-gray_img_scaled = get_grayscale(img_scaled)
+#gray_img = get_grayscale(img)
+top_img_scaled = get_grayscale(top_img_scaled)
+bottom_img_scaled = get_grayscale(bottom_img_scaled)
 #opening_img = opening(gray_img)
 
 #gray_img_scaled = get_grayscale(img_scaled)
@@ -41,11 +43,14 @@ gray_img_scaled = get_grayscale(img_scaled)
 
 custom_config = r'--oem 3 --psm 4'
 
-text_gray_img = pytesseract.image_to_string(gray_img, config=custom_config)
-text_gray_img_scaled = pytesseract.image_to_string(gray_img_scaled, config=custom_config)
+text_top = pytesseract.image_to_string(top_img_scaled, config=custom_config)
+text_bottom = pytesseract.image_to_string(bottom_img_scaled, config=custom_config)
 #text_original_scaled = pytesseract.image_to_string(opening_img_scaled, config=custom_config)
 #text_gray_img_scaled = pytesseract.image_to_string(gray_img_scaled, config=custom_config)
 
+print(text_top)
+print(text_bottom)
+exit()
 
 max_score = 0
 best_text = None
