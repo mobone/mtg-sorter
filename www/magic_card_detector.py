@@ -900,7 +900,7 @@ class MagicCardDetector:
             
             
 
-        self.reference_images = this_reference_images
+        
         
             
         d_0 = np.zeros((len(this_reference_images), len(rotations)))
