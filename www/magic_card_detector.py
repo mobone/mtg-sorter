@@ -712,6 +712,7 @@ class MagicCardDetector:
         maxsize = 1000
         print('Reading images from >' + str(path))
         print('...', end=' ')
+        self.test_images = []
         filenames = glob.glob(path + '*.jpg')
         #filenames_jpg = glob.glob(path + '*.png')
         #print('filenames here:', filenames)
@@ -946,6 +947,7 @@ class MagicCardDetector:
         """
         print('running recognition')
         #input()
+        image_index = None
         if image_index is None:
             image_index = range(len(self.test_images))
         elif not isinstance(image_index, list):
