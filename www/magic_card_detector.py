@@ -883,8 +883,8 @@ class MagicCardDetector:
         for img in self.reference_images:
             if best_text_recognized is not None and best_text_recognized not in img.name.lower():
                 continue
-            if 'tusk' in img.name.lower():
-                this_reference_images.append(img)
+            #if 'tusk' in img.name.lower():
+            this_reference_images.append(img)
 
         self.reference_images = this_reference_images
         

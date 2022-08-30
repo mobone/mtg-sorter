@@ -110,11 +110,11 @@ def index():
         print('got post form')
         scan_card()
         print('card scanned')
-        '''
+        
         best_score, best_text_type, best_text = get_text()
         print('got text of', best_text)
         magic_card_detector.best_text_recognized = best_text
-        '''
+        
         
         magic_card_detector.run()
         end = time.time()
