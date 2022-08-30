@@ -32,6 +32,8 @@ def get_text():
     dim = (img.shape[1], img.shape[0])
 
     img = img[0:300, 0:dim[0]]
+
+    cv2.imwrite('cropped.jpg', img)
     
     scale_percent = 50 # percent of original size
     width = int(img.shape[1] * scale_percent / 100)
