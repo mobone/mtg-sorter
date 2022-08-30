@@ -25,6 +25,8 @@ df = pd.read_sql('select name from cards_unique', conn)
 
 recognized_cards = []
 
+magic_card_detector.load()
+
 def get_text():
     img = cv2.imread('./static/current_scan.jpg')
 
@@ -108,10 +110,12 @@ def index():
         print('got post form')
         scan_card()
         print('card scanned')
+        '''
         best_score, best_text_type, best_text = get_text()
         print('got text of', best_text)
         magic_card_detector.best_text_recognized = best_text
-        magic_card_detector.load()
+        '''
+        
         magic_card_detector.run()
         end = time.time()
 
