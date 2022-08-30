@@ -25,6 +25,7 @@ df = pd.read_sql('select name from cards_unique', conn)
 
 recognized_cards = []
 
+magic_card_detector.load()
 
 
 def get_text():
@@ -35,26 +36,26 @@ def get_text():
 
     img = img[0:200, 0:dim[0]]
 
-    cv2.imwrite('/home/admn/Documents/mtg-sorter/cropped.jpg', img)
+    #cv2.imwrite('/home/admn/Documents/mtg-sorter/cropped.jpg', img)
     
-    scale_percent = 50 # percent of original size
-    width = int(img.shape[1] * scale_percent / 100)
-    height = int(img.shape[0] * scale_percent / 100)
-    dim = (width, height)
+    #scale_percent = 50 # percent of original size
+    #width = int(img.shape[1] * scale_percent / 100)
+    #height = int(img.shape[0] * scale_percent / 100)
+    #dim = (width, height)
 
-    img_scaled = cv2.resize(img, dim, interpolation = cv2.INTER_AREA)
+    #img_scaled = cv2.resize(img, dim, interpolation = cv2.INTER_AREA)
 
     gray_img = get_grayscale(img)
-    opening_img = opening(gray_img)
+    #opening_img = opening(gray_img)
 
-    gray_img_scaled = get_grayscale(img_scaled)
-    opening_img_scaled = opening(gray_img_scaled)
+    #gray_img_scaled = get_grayscale(img_scaled)
+    #opening_img_scaled = opening(gray_img_scaled)
     
     custom_config = r'--oem 3 --psm 4'
     
     text_gray_img = pytesseract.image_to_string(gray_img, config=custom_config)
-    text_original_scaled = pytesseract.image_to_string(opening_img_scaled, config=custom_config)
-    text_gray_img_scaled = pytesseract.image_to_string(gray_img_scaled, config=custom_config)
+    #text_original_scaled = pytesseract.image_to_string(opening_img_scaled, config=custom_config)
+    #text_gray_img_scaled = pytesseract.image_to_string(gray_img_scaled, config=custom_config)
 
     
     max_score = 0
@@ -116,7 +117,7 @@ def index():
         print('got text of', best_text)
         magic_card_detector.best_text_recognized = best_text
         
-        magic_card_detector.load()
+        
         magic_card_detector.run()
         end = time.time()
 

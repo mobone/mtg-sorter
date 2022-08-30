@@ -642,14 +642,18 @@ class MagicCardDetector:
             hashed_list = pickle.load(filename)
         
         for ref_im in hashed_list:
+            '''
             global best_text_recognized    
-            print('loading using', best_text_recognized)
+            #print('loading using', best_text_recognized)
             if best_text_recognized is None:
                 self.reference_images.append(
                     ReferenceImage(ref_im.name, None, self.clahe, ref_im.phash))
                 continue
             if best_text_recognized.strip().lower() in ref_im.name.lower():
                 self.reference_images.append(
+                    ReferenceImage(ref_im.name, None, self.clahe, ref_im.phash))
+            '''
+            self.reference_images.append(
                     ReferenceImage(ref_im.name, None, self.clahe, ref_im.phash))
         print('Done.')
 
@@ -899,7 +903,7 @@ class MagicCardDetector:
         self.reference_images = this_reference_images
         
             
-        d_0 = np.zeros((len(self.reference_images), len(rotations)))
+        d_0 = np.zeros((len(this_reference_images), len(rotations)))
         for j, rot in enumerate(rotations):
             if not -1.e-5 < rot < 1.e-5:
                 phash_im = imagehash.phash(
@@ -920,7 +924,7 @@ class MagicCardDetector:
                 print('Phash statistical distance: ' + str(d_0_dist[j]))
             if (d_0_dist[j] > self.hash_separation_thr and
                     np.argmax(d_0_dist) == j):
-                card_name = self.reference_images[np.argmin(d_0[:, j])]\
+                card_name = this_reference_images[np.argmin(d_0[:, j])]\
                     .name.split('.png')[0]
                 is_recognized = True
                 recognition_score = d_0_dist[j] / self.hash_separation_thr
