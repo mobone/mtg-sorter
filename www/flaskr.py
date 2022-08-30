@@ -106,13 +106,18 @@ def index():
         scan_card()
         print('card scanned')
         best_score, best_text_type, best_text = get_text()
+        print('got text of', best_text)
         magic_card_detector.best_text_recognized = best_text
         magic_card_detector.load()
         magic_card_detector.run()
         end = time.time()
 
         print("full run took", end - start, 'seconds')
+        
         print('recognized card as', magic_card_detector.card_detected)
+
+        magic_card_detector.card_detected = None
+        magic_card_detector.best_text_recognized = None
         #ecognized = magic_card_detector.return_recognized()
         #print(recognized)
         #for image in magic_card_detector.card_detector.test_images:
