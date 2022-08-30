@@ -33,7 +33,7 @@ def get_text():
 
     img = img[0:300, 0:dim[0]]
 
-    cv2.imwrite('cropped.jpg', img)
+    cv2.imwrite('/home/admn/Documents/mtg-sorter/cropped.jpg', img)
     
     scale_percent = 50 # percent of original size
     width = int(img.shape[1] * scale_percent / 100)
