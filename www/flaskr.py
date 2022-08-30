@@ -20,10 +20,10 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.urandom(24).hex()
 
-conn = sqlite3.connect('card.db')
+conn = sqlite3.connect('/home/admn/Documents/mtg-sorter/www/card.db')
 df = pd.read_sql('select name from cards_unique', conn)
 
-
+recognized_cards = []
 
 def get_text():
     img = cv2.imread('./static/current_scan.jpg')
@@ -116,6 +116,8 @@ def index():
         
         print('recognized card as', magic_card_detector.card_detected)
 
+        recognized_cards = [magic_card_detector.card_detected] + recognized_cards
+
         magic_card_detector.card_detected = None
         magic_card_detector.best_text_recognized = None
         #ecognized = magic_card_detector.return_recognized()
@@ -124,7 +126,7 @@ def index():
             #print(image.return_recognized()[0].name)
         
         
-    return render_template('index.html')
+    return render_template('index.html', recognized_cards=recognized_cards)
 
 if __name__ == '__main__':
     app.config['TEMPLATES_AUTO_RELOAD'] = False

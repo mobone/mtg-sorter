@@ -43,9 +43,10 @@
                   </tr>
                 </thead>
                 <tbody>
+                  {% for recognized_card in recognized_cards %}
                   <tr>
                     
-                    <th score="row">Felisa, Fang of Silverquill</th>
+                    <th score="row">{{ recognized_card }}</th>
                     <td><img src="/static/symbols/2_symbol.gif"><img src="/static/symbols/white_symbol.gif"><img src="/static/symbols/black_symbol.gif"></td>
                     <td><img src="/static/symbols/rare_symbol.png"></td>
                   </tr>
