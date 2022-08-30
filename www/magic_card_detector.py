@@ -648,7 +648,7 @@ class MagicCardDetector:
                 self.reference_images.append(
                     ReferenceImage(ref_im.name, None, self.clahe, ref_im.phash))
                 continue
-            if best_text_recognized.strip().lower() in ref_im.name.lower()
+            if best_text_recognized.strip().lower() in ref_im.name.lower():
                 self.reference_images.append(
                     ReferenceImage(ref_im.name, None, self.clahe, ref_im.phash))
         print('Done.')
