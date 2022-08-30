@@ -33,7 +33,7 @@ def get_text():
     
     dim = (img.shape[1], img.shape[0])
 
-    img = img[0:300, 0:dim[0]]
+    img = img[0:200, 0:dim[0]]
 
     cv2.imwrite('/home/admn/Documents/mtg-sorter/cropped.jpg', img)
     
