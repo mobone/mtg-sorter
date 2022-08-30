@@ -640,10 +640,10 @@ class MagicCardDetector:
         print('...', end=' ')
         with open(path, 'rb') as filename:
             hashed_list = pickle.load(filename)
-        global best_text_recognized
+        
         for ref_im in hashed_list:
-            
-
+            global best_text_recognized    
+            print('loading using', best_text_recognized)
             if best_text_recognized is not None and best_text_recognized not in ref_im.name.lower():
                 continue
             self.reference_images.append(
@@ -879,8 +879,10 @@ class MagicCardDetector:
         d_0_dist = np.zeros(len(rotations))
         
         this_reference_images = []
-        global best_text_recognized
+        
         for img in self.reference_images:
+            global best_text_recognized
+            print('comparing using', best_text_recognized)
             if best_text_recognized is not None and best_text_recognized not in img.name.lower():
                 continue
             #if 'tusk' in img.name.lower():
