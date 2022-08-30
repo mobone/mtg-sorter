@@ -644,10 +644,13 @@ class MagicCardDetector:
         for ref_im in hashed_list:
             global best_text_recognized    
             print('loading using', best_text_recognized)
-            if best_text_recognized is not None and best_text_recognized not in ref_im.name.lower():
+            if best_text_recognized is None:
+                self.reference_images.append(
+                    ReferenceImage(ref_im.name, None, self.clahe, ref_im.phash))
                 continue
-            self.reference_images.append(
-                ReferenceImage(ref_im.name, None, self.clahe, ref_im.phash))
+            if best_text_recognized.strip().lower() in ref_im.name.lower()
+                self.reference_images.append(
+                    ReferenceImage(ref_im.name, None, self.clahe, ref_im.phash))
         print('Done.')
 
     def read_and_adjust_reference_images(self, path):
@@ -882,11 +885,16 @@ class MagicCardDetector:
         
         for img in self.reference_images:
             global best_text_recognized
-            print('comparing using', best_text_recognized)
-            if best_text_recognized is not None and best_text_recognized not in img.name.lower():
+            #print('comparing using', best_text_recognized)
+            if best_text_recognized is None:
+                this_reference_images.append(img)
                 continue
-            #if 'tusk' in img.name.lower():
-            this_reference_images.append(img)
+
+            if best_text_recognized.strip().lower() in img.name.lower():
+                this_reference_images.append(img)
+
+            
+            
 
         self.reference_images = this_reference_images
         
