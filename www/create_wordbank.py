@@ -26,7 +26,7 @@ all_words = []
 for key, row in df.iterrows():
     for item in ['name', 'setCode', 'artist']:
         item_text = row[item]
-        print(item_text)
+        #print(item_text)
         try:
             for word in item_text.split(' '):
                 all_words.append(word)
@@ -36,3 +36,9 @@ for key, row in df.iterrows():
 all_words = set(all_words)
 print(all_words)
 
+with open('test_data.txt', 'w') as f:
+    for word in all_words:
+        try:
+            f.write(word+' ')
+        except:
+            pass
