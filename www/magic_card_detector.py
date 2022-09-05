@@ -714,7 +714,7 @@ class MagicCardDetector:
         print('Reading images from >' + str(path))
         print('...', end=' ')
         self.test_images = []
-        filenames = glob.glob(path + '*.jpg')
+        filenames = glob.glob(path + '*.tiff')
         #filenames_jpg = glob.glob(path + '*.png')
         #print('filenames here:', filenames)
         #filenames = filenames + filenames_jpg
@@ -898,6 +898,7 @@ class MagicCardDetector:
                 continue
 
             if set_found.strip().lower() in img.name.lower():
+                print('loading', img)
                 this_reference_images.append(img)
 
             
