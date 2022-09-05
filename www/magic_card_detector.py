@@ -607,7 +607,7 @@ class MagicCardDetector:
         self.test_images = []
         self.output_path = output_path
 
-        self.verbose = False
+        self.verbose = True
         self.visual = False
 
         self.hash_separation_thr = 4.
@@ -989,6 +989,23 @@ class MagicCardDetector:
             
         print('Recognition done.')
 
+    def run_segmentation(self, i_cand, candidate, test_image):
+        im_seg = candidate.image
+        if self.verbose:
+            print(str(i_cand + 1) + " / " +
+                    str(len(test_image.candidate_list)))
+
+        # Easy fragment / duplicate detection
+        for other_candidate in test_image.candidate_list:
+            if (other_candidate.is_recognized and
+                    not other_candidate.is_fragment):
+                if other_candidate.contains(candidate):
+                    candidate.is_fragment = True
+        if not candidate.is_fragment:
+            (candidate.is_recognized,
+                candidate.recognition_score,
+                candidate.name) = self.recognize_segment(im_seg)
+
 
     def recognize_cards_in_image(self, test_image, contouring_mode):
         """
@@ -1008,21 +1025,7 @@ class MagicCardDetector:
         print('Recognizing candidates.')
 
         for i_cand, candidate in enumerate(test_image.candidate_list):
-            im_seg = candidate.image
-            if self.verbose:
-                print(str(i_cand + 1) + " / " +
-                      str(len(test_image.candidate_list)))
-
-            # Easy fragment / duplicate detection
-            for other_candidate in test_image.candidate_list:
-                if (other_candidate.is_recognized and
-                        not other_candidate.is_fragment):
-                    if other_candidate.contains(candidate):
-                        candidate.is_fragment = True
-            if not candidate.is_fragment:
-                (candidate.is_recognized,
-                 candidate.recognition_score,
-                 candidate.name) = self.recognize_segment(im_seg)
+            run_segmentation(i_cand, candidate, test_image)
 
         print('Done. Found ' +
               str(len(test_image.return_recognized())) +
