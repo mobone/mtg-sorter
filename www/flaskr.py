@@ -36,7 +36,7 @@ magic_card_detector.load()
 def get_text():
     img = cv2.imread('./static/current_scan.tiff')
     
-    img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)
+    #img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)
     
 
         
@@ -103,7 +103,7 @@ def get_text():
         print('set code not found')
     print('\n\n')
     
-    return set_found
+    return set_found, text_bottom
 
 
 @app.route('/scan-card')
@@ -132,9 +132,9 @@ def index():
         scan_card()
         print('card scanned')
         
-        best_score, best_text_type, best_text = get_text()
-        print('got text of', best_text)
-        magic_card_detector.best_text_recognized = best_text
+        set_found, bottom_text = get_text()
+        
+        magic_card_detector.set_found = set_found
         
         
         magic_card_detector.run()
@@ -147,7 +147,7 @@ def index():
         recognized_cards = [magic_card_detector.card_detected] + recognized_cards
 
         magic_card_detector.card_detected = None
-        magic_card_detector.best_text_recognized = None
+        magic_card_detector.set_found = None
         #ecognized = magic_card_detector.return_recognized()
         #print(recognized)
         #for image in magic_card_detector.card_detector.test_images:

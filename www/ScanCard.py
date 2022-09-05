@@ -48,7 +48,7 @@ def scan_card():
     frame = camera.getFrame()
     img = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
     img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)
-    cv2.imwrite("./static/current_scan.jpg", img)
+    cv2.imwrite("./static/current_scan.tiff", img)
     
     #camera.close()
 

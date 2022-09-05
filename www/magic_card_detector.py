@@ -723,7 +723,7 @@ class MagicCardDetector:
             if 'current_scan' not in filename:
                 continue
             img = cv2.imread(filename)
-            img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)
+            #img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)
             if min(img.shape[0], img.shape[1]) > maxsize:
                 scalef = maxsize / min(img.shape[0], img.shape[1])
                 img = cv2.resize(img,
