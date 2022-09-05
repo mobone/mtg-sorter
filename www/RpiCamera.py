@@ -15,11 +15,11 @@ class Camera(object):
     _value_lock = None
     # previewer = None
 
-    def __init__(self, width=640*2, height=360*2):
+    def __init__(self, width=1920, height=1080):
         self._value_lock = threading.Lock()
         self.open_camera(width, height)
 
-    def open_camera(self, width=640*2, height=360*2, framerate=30):
+    def open_camera(self, width=1920, height=1080, framerate=30):
         self.cam = Picamera2()
         self.cam.configure(self.cam.create_preview_configuration(main={"size":(width, height)},buffer_count=4))
         # self.cam.start_preview(Preview.QTGL)
