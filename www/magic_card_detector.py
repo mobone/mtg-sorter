@@ -718,7 +718,7 @@ class MagicCardDetector:
         #filenames_jpg = glob.glob(path + '*.png')
         #print('filenames here:', filenames)
         #filenames = filenames + filenames_jpg
-        print('found this many filenames', filenames)
+        #print('found this many filenames', filenames)
         for filename in filenames:
             if 'current_scan' not in filename:
                 continue
@@ -894,6 +894,7 @@ class MagicCardDetector:
             global set_found
             #print('comparing using', best_text_recognized)
             if set_found is None:
+                print('set found is', set_found)
                 this_reference_images.append(img)
                 continue
 
