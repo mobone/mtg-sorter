@@ -888,21 +888,21 @@ class MagicCardDetector:
         rotations = np.array([0.])
         d_0_dist = np.zeros(len(rotations))
         
-        this_reference_images = []
+        this_reference_images = self.reference_images
         
-        
+        '''
         for img in self.reference_images:
             global set_found
             #print('comparing using', best_text_recognized)
             if set_found is None:
-                print('set found is', set_found)
+                #print('set found is', set_found)
                 this_reference_images.append(img)
                 continue
 
             if set_found.strip().lower() in img.name.lower():
-                print('loading', img)
+                #print('loading', img)
                 this_reference_images.append(img)
-        
+        '''
             
             
 
