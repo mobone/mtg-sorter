@@ -1063,8 +1063,9 @@ def load():
 def run():
     global card_detector
     start = time.time()
+    print('reading test images')
     card_detector.read_and_adjust_test_images('./static/')
-    #print('running recognition!')
+    print('running recognition!')
     card_detector.run_recognition()
     
     end = time.time()
