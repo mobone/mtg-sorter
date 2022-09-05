@@ -30,7 +30,8 @@ import cv2
 import multitasking
 import time
 
-best_text_recognized = None
+#best_text_recognized = None
+set_found = None
 card_detector = None
 card_detected = None
 card_detected_score = None
@@ -722,6 +723,7 @@ class MagicCardDetector:
             if 'current_scan' not in filename:
                 continue
             img = cv2.imread(filename)
+            img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)
             if min(img.shape[0], img.shape[1]) > maxsize:
                 scalef = maxsize / min(img.shape[0], img.shape[1])
                 img = cv2.resize(img,
@@ -889,13 +891,13 @@ class MagicCardDetector:
         this_reference_images = []
         
         for img in self.reference_images:
-            global best_text_recognized
+            global set_found
             #print('comparing using', best_text_recognized)
-            if best_text_recognized is None:
+            if set_found is None:
                 this_reference_images.append(img)
                 continue
 
-            if best_text_recognized.strip().lower() in img.name.lower():
+            if set_found.strip().lower() in img.name.lower():
                 this_reference_images.append(img)
 
             

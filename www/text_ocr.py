@@ -25,6 +25,7 @@ best_ratio = 0
 best_text = ''
 
 
+
 @multitasking.task
 def get_best_match(this_input):
     print('STARTING TASK')
@@ -57,6 +58,10 @@ if __name__ == '__main__':
     conn = sqlite3.connect('card.db')
 
     df = pd.read_sql('select name, number, setCode, artist from cards', conn)
+
+    sets = pd.read_sql('select setCode from cards', conn).drop_duplicates()
+    sets = sets.values
+    print(sets)
 
     names_list = []
     for key, row in df.iterrows():
@@ -129,12 +134,28 @@ if __name__ == '__main__':
             #text_top = text_top[:text_top.find('\n')]
             text_bottom = pytesseract.image_to_string(bottom_img_scaled, config=custom_config_bottom).strip()
             text_bottom = text_bottom.replace('Wizards of the Coast','')
-            print(text_top)
+            #print(text_top)
             print(text_bottom)
-            #input()
+            
             
         except Exception as e:
             print(e)
+
+
+        set_found = None
+        
+        for set_code in sets:
+            set_code = set_code[0]
+            if set_code.lower()+' ' in text_bottom.lower():
+                
+                set_found = set_code
+                print('found set code', set_code)
+                break
+
+        if set_found is None:
+            print('set code not found')
+        print('\n\n')
+        continue
             
         #text_original_scaled = pytesseract.image_to_string(opening_img_scaled, config=custom_config)
         #text_gray_img_scaled = pytesseract.image_to_string(gray_img_scaled, config=custom_config)

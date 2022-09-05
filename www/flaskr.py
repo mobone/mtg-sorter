@@ -23,80 +23,87 @@ app.config['SECRET_KEY'] = os.urandom(24).hex()
 conn = sqlite3.connect('/home/admn/Documents/mtg-sorter/www/card.db')
 df = pd.read_sql('select name from cards_unique', conn)
 
+sets = pd.read_sql('select setCode from cards', conn).drop_duplicates()
+sets = sets.values
+
+
 recognized_cards = []
 
 magic_card_detector.load()
 
-@app.after_request
-def add_header(r):
-    """
-    Add headers to both force latest IE rendering engine or Chrome Frame,
-    and also to cache the rendered page for 10 minutes.
-    """
-    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-    r.headers["Pragma"] = "no-cache"
-    r.headers["Expires"] = "0"
-    r.headers['Cache-Control'] = 'public, max-age=0'
-    return r
+
 
 def get_text():
-    img = cv2.imread('./static/current_scan.jpg')
+    img = cv2.imread('./static/current_scan.tiff')
     
+    img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)
+    
+
+        
     dim = (img.shape[1], img.shape[0])
+    #top_img = img[0:400, 0:dim[0]]
+    bottom_img = img[dim[1]-500:dim[1], 0:dim[0]]
 
-    img = img[0:200, 0:dim[0]]
 
-    #cv2.imwrite('/home/admn/Documents/mtg-sorter/cropped.jpg', img)
+    #scale_percent = 75 # percent of original size
+    #width = int(top_img.shape[1] * scale_percent / 100)
+    #height = int(top_img.shape[0] * scale_percent / 100)
+    #dim_top = (width, height)
 
-    #scale_percent = 50 # percent of original size
-    #width = int(img.shape[1] * scale_percent / 100)
-    #height = int(img.shape[0] * scale_percent / 100)
-    #dim = (width, height)
+    scale_percent = 200 # percent of original size
+    width = int(bottom_img.shape[1] * scale_percent / 100)
+    height = int(bottom_img.shape[0] * scale_percent / 100)
+    dim_bottom = (width, height)
 
-    #img_scaled = cv2.resize(img, dim, interpolation = cv2.INTER_AREA)
 
-    gray_img = get_grayscale(img)
-    #gray_img_scaled = get_grayscale(img_scaled)
-    #opening_img = opening(gray_img)
+
+
+    #top_img_scaled = cv2.resize(top_img, dim_top, interpolation = cv2.INTER_AREA)
+    bottom_img_scaled = cv2.resize(bottom_img, dim_bottom, interpolation = cv2.INTER_AREA)
+
+    #top_img_scaled = get_grayscale(top_img_scaled)
+
+    bottom_img_scaled = cv2.bitwise_not(bottom_img_scaled)
+    
+    cv2.imwrite('./static/cropped.tiff', bottom_img_scaled)
+    #cv2.imwrite('./static/cropped_top.tiff', top_img_scaled)
 
     #gray_img_scaled = get_grayscale(img_scaled)
     #opening_img_scaled = opening(gray_img_scaled)
 
-    custom_config = r'--oem 3 --psm 4'
-
-    text_gray_img = pytesseract.image_to_string(gray_img, config=custom_config)
-    #text_gray_img_scaled = pytesseract.image_to_string(gray_img_scaled, config=custom_config)
-    #text_original_scaled = pytesseract.image_to_string(opening_img_scaled, config=custom_config)
-    #text_gray_img_scaled = pytesseract.image_to_string(gray_img_scaled, config=custom_config)
 
 
-    max_score = 0
-    best_text = None
-    best_text_type = None
-    best_text = None
-
-    #for text, text_type in [(text_gray_img, 'gray'), (text_gray_img_scaled, 'gray_scaled')]:
-    for text, text_type in [(text_gray_img, 'gray')]:
+    
+    custom_config_top = r'--oem 3 --psm 6'
+    custom_config_bottom = r'--oem 3 --psm 6'
+    try:
+        #text_top = pytesseract.image_to_string(top_img_scaled, config=custom_config_top).strip()
+        #text_top = text_top[:text_top.find('\n')]
+        text_bottom = pytesseract.image_to_string(bottom_img_scaled, config=custom_config_bottom).strip()
+        text_bottom = text_bottom.replace('Wizards of the Coast','')
+        #print(text_top)
+        print(text_bottom)
         
-        if text is None or text == '':
-            print('text is none')
-            continue
-        print('----------------')
-        print(text)
-        print('----------------')
-        #input()
-        for key, row in df.iterrows():
+        
+    except Exception as e:
+        print(e)
 
-            ratio = fuzz.ratio(text, row.values[0])
-            if ratio<50:
-                continue
-            if ratio > max_score:
-                best_text = row.values[0]
-                best_text_type = text_type
-                max_score = ratio
-                print(ratio, '\t', best_text_type, '\t', best_text)
-                
-    return (max_score, best_text_type, best_text)
+
+    set_found = None
+    
+    for set_code in sets:
+        set_code = set_code[0]
+        if set_code.lower()+' ' in text_bottom.lower():
+            
+            set_found = set_code
+            print('found set code', set_code)
+            break
+
+    if set_found is None:
+        print('set code not found')
+    print('\n\n')
+    
+    return set_found
 
 
 @app.route('/scan-card')
