@@ -132,9 +132,9 @@ def index():
         scan_card()
         print('card scanned')
         
-        set_found, bottom_text = get_text()
+        #set_found, bottom_text = get_text()
         
-        magic_card_detector.set_found = set_found
+        magic_card_detector.set_found = None
         
         
         magic_card_detector.run()
