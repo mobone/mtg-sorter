@@ -989,6 +989,7 @@ class MagicCardDetector:
             
         print('Recognition done.')
 
+    @multitasking.task
     def run_segmentation(self, i_cand, candidate, test_image):
         im_seg = candidate.image
         if self.verbose:
@@ -1025,8 +1026,8 @@ class MagicCardDetector:
         print('Recognizing candidates.')
 
         for i_cand, candidate in enumerate(test_image.candidate_list):
-            run_segmentation(i_cand, candidate, test_image)
-
+            self.run_segmentation(i_cand, candidate, test_image)
+        multitasking.wait_for_tasks()
         print('Done. Found ' +
               str(len(test_image.return_recognized())) +
               ' cards.')
