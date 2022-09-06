@@ -148,6 +148,13 @@ def index():
         
         print(sql)
         card_details = pd.read_sql(sql, conn).head(1)
+
+        if len(card_details) == 0:
+            print('could not find card in card database, searching by name alone instead')
+            sql = 'select * from cards where name == "%s"' % (magic_card_detector.card_detected.split(' - ')[1])
+            print(sql)
+            card_details = pd.read_sql(sql, conn).head(1)
+
         print(card_details)
         card_dict = {
             'card_name': str(card_details['name'].values[0]), 
