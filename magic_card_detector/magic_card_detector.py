@@ -915,8 +915,8 @@ class MagicCardDetector:
                         len(test_image.return_recognized()) > 25):
                     break
             #multitasking.wait_for_tasks()
-            print('Plotting and saving the results...')
-            test_image.plot_image_with_recognized(self.output_path, self.visual)
+            #print('Plotting and saving the results...')
+            #test_image.plot_image_with_recognized(self.output_path, self.visual)
             print('Done.')
             test_image.print_recognized()
             
