@@ -14,6 +14,7 @@ import sqlite3
 import os
 import pandas as pd
 import time
+from markupsafe import Markup
 
 
 app = Flask(__name__)
@@ -122,6 +123,40 @@ def display_current():
 
         return response
 
+def get_mana_symbols(mana_cost):
+
+    mana_cost = mana_cost.replace('{0}', '<img src="./static/symbols/B00 - Colorless Mana - Zero.svg"')
+    mana_cost = mana_cost.replace('{1}', '<img src="./static/symbols/B01 - Colorless Mana - One.svg"')
+    mana_cost = mana_cost.replace('{2}', '<img src="./static/symbols/B02 - Colorless Mana - Two.svg"')
+    mana_cost = mana_cost.replace('{3}', '<img src="./static/symbols/B03 - Colorless Mana - Three.svg"')
+    mana_cost = mana_cost.replace('{4}', '<img src="./static/symbols/B04 - Colorless Mana - Four.svg"')
+    mana_cost = mana_cost.replace('{5}', '<img src="./static/symbols/B05 - Colorless Mana - Five.svg"')
+    mana_cost = mana_cost.replace('{6}', '<img src="./static/symbols/B06 - Colorless Mana - Six.svg"')
+    mana_cost = mana_cost.replace('{7}', '<img src="./static/symbols/B07 - Colorless Mana - Seven.svg"')
+    mana_cost = mana_cost.replace('{8}', '<img src="./static/symbols/B08 - Colorless Mana - Eight.svg"')
+    mana_cost = mana_cost.replace('{9}', '<img src="./static/symbols/B09 - Colorless Mana - Nine.svg"')
+    mana_cost = mana_cost.replace('{10}', '<img src="./static/symbols/B10 - Colorless Mana - Ten.svg"')
+    mana_cost = mana_cost.replace('{11}', '<img src="./static/symbols/B11 - Colorless Mana - Eleven.svg"')
+    mana_cost = mana_cost.replace('{12}', '<img src="./static/symbols/B12 - Colorless Mana - Twelve.svg"')
+    mana_cost = mana_cost.replace('{13}', '<img src="./static/symbols/B13 - Colorless Mana - Thirteen.svg"')
+    mana_cost = mana_cost.replace('{14}', '<img src="./static/symbols/B14 - Colorless Mana - Fourteen.svg"')
+    mana_cost = mana_cost.replace('{15}', '<img src="./static/symbols/B15 - Colorless Mana - Fifteen.svg"')
+    mana_cost = mana_cost.replace('{16}', '<img src="./static/symbols/B16 - Colorless Mana - Sixteen.svg"')
+    mana_cost = mana_cost.replace('{17}', '<img src="./static/symbols/B17 - Colorless Mana - Seventeen.svg"')
+    mana_cost = mana_cost.replace('{18}', '<img src="./static/symbols/B18 - Colorless Mana - Eighteen.svg"')
+    mana_cost = mana_cost.replace('{19}', '<img src="./static/symbols/B19 - Colorless Mana - Nineteen.svg"')
+    mana_cost = mana_cost.replace('{20}', '<img src="./static/symbols/B20 - Colorless Mana - Twenty.svg"')
+
+    mana_cost = mana_cost.replace('{W}', '<img src=".static/symbols/A01 - Colored Mana - White.svg')
+    mana_cost = mana_cost.replace('{U}', '<img src=".static/symbols/A02 - Colored Mana - Blue.svg')
+    mana_cost = mana_cost.replace('{B}', '<img src=".static/symbols/A03 - Colored Mana - Black.svg')
+    mana_cost = mana_cost.replace('{R}', '<img src=".static/symbols/A04 - Colored Mana - Red.svg')
+    mana_cost = mana_cost.replace('{G}', '<img src=".static/symbols/A05 - Colored Mana - Green.svg')
+    mana_cost = mana_cost.replace('{S}', '<img src=".static/symbols/A06 - Colored Mana - Snow.svg')
+
+
+    
+    return Markup(mana_cost)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -159,6 +194,7 @@ def index():
         card_dict = {
             'card_name': str(card_details['name'].values[0]), 
             'mana_cost': str(card_details['manaCost'].values[0]),
+            'mana_cost_html': get_mana_symbols(str(card_details['manaCost'].values[0])),
             'rarity': str(card_details['rarity'].values[0])
         }
         print(card_dict)
