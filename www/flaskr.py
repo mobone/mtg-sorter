@@ -147,12 +147,12 @@ def get_mana_symbols(mana_cost):
     mana_cost = mana_cost.replace('{19}', '<img src="./static/symbols/B19 - Colorless Mana - Nineteen.svg"')
     mana_cost = mana_cost.replace('{20}', '<img src="./static/symbols/B20 - Colorless Mana - Twenty.svg"')
 
-    mana_cost = mana_cost.replace('{W}', '<img src=".static/symbols/A01 - Colored Mana - White.svg')
-    mana_cost = mana_cost.replace('{U}', '<img src=".static/symbols/A02 - Colored Mana - Blue.svg')
-    mana_cost = mana_cost.replace('{B}', '<img src=".static/symbols/A03 - Colored Mana - Black.svg')
-    mana_cost = mana_cost.replace('{R}', '<img src=".static/symbols/A04 - Colored Mana - Red.svg')
-    mana_cost = mana_cost.replace('{G}', '<img src=".static/symbols/A05 - Colored Mana - Green.svg')
-    mana_cost = mana_cost.replace('{S}', '<img src=".static/symbols/A06 - Colored Mana - Snow.svg')
+    mana_cost = mana_cost.replace('{W}', '<img src="./static/symbols/A01 - Colored Mana - White.svg')
+    mana_cost = mana_cost.replace('{U}', '<img src="./static/symbols/A02 - Colored Mana - Blue.svg')
+    mana_cost = mana_cost.replace('{B}', '<img src="./static/symbols/A03 - Colored Mana - Black.svg')
+    mana_cost = mana_cost.replace('{R}', '<img src="./static/symbols/A04 - Colored Mana - Red.svg')
+    mana_cost = mana_cost.replace('{G}', '<img src="./static/symbols/A05 - Colored Mana - Green.svg')
+    mana_cost = mana_cost.replace('{S}', '<img src="./static/symbols/A06 - Colored Mana - Snow.svg')
 
 
     
