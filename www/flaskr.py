@@ -125,38 +125,58 @@ def display_current():
 
 def get_mana_symbols(mana_cost):
 
-    mana_cost = mana_cost.replace('{0}', '<img src="./static/symbols/B00 - Colorless Mana - Zero.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{1}', '<img src="./static/symbols/B01 - Colorless Mana - One.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{2}', '<img src="./static/symbols/B02 - Colorless Mana - Two.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{3}', '<img src="./static/symbols/B03 - Colorless Mana - Three.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{4}', '<img src="./static/symbols/B04 - Colorless Mana - Four.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{5}', '<img src="./static/symbols/B05 - Colorless Mana - Five.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{6}', '<img src="./static/symbols/B06 - Colorless Mana - Six.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{7}', '<img src="./static/symbols/B07 - Colorless Mana - Seven.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{8}', '<img src="./static/symbols/B08 - Colorless Mana - Eight.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{9}', '<img src="./static/symbols/B09 - Colorless Mana - Nine.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{10}', '<img src="./static/symbols/B10 - Colorless Mana - Ten.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{11}', '<img src="./static/symbols/B11 - Colorless Mana - Eleven.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{12}', '<img src="./static/symbols/B12 - Colorless Mana - Twelve.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{13}', '<img src="./static/symbols/B13 - Colorless Mana - Thirteen.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{14}', '<img src="./static/symbols/B14 - Colorless Mana - Fourteen.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{15}', '<img src="./static/symbols/B15 - Colorless Mana - Fifteen.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{16}', '<img src="./static/symbols/B16 - Colorless Mana - Sixteen.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{17}', '<img src="./static/symbols/B17 - Colorless Mana - Seventeen.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{18}', '<img src="./static/symbols/B18 - Colorless Mana - Eighteen.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{19}', '<img src="./static/symbols/B19 - Colorless Mana - Nineteen.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{20}', '<img src="./static/symbols/B20 - Colorless Mana - Twenty.svg" width="45" height="45">')
+    mana_cost = mana_cost.replace('{0}', '<img src="./static/symbols/B00 - Colorless Mana - Zero.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{1}', '<img src="./static/symbols/B01 - Colorless Mana - One.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{2}', '<img src="./static/symbols/B02 - Colorless Mana - Two.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{3}', '<img src="./static/symbols/B03 - Colorless Mana - Three.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{4}', '<img src="./static/symbols/B04 - Colorless Mana - Four.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{5}', '<img src="./static/symbols/B05 - Colorless Mana - Five.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{6}', '<img src="./static/symbols/B06 - Colorless Mana - Six.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{7}', '<img src="./static/symbols/B07 - Colorless Mana - Seven.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{8}', '<img src="./static/symbols/B08 - Colorless Mana - Eight.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{9}', '<img src="./static/symbols/B09 - Colorless Mana - Nine.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{10}', '<img src="./static/symbols/B10 - Colorless Mana - Ten.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{11}', '<img src="./static/symbols/B11 - Colorless Mana - Eleven.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{12}', '<img src="./static/symbols/B12 - Colorless Mana - Twelve.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{13}', '<img src="./static/symbols/B13 - Colorless Mana - Thirteen.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{14}', '<img src="./static/symbols/B14 - Colorless Mana - Fourteen.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{15}', '<img src="./static/symbols/B15 - Colorless Mana - Fifteen.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{16}', '<img src="./static/symbols/B16 - Colorless Mana - Sixteen.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{17}', '<img src="./static/symbols/B17 - Colorless Mana - Seventeen.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{18}', '<img src="./static/symbols/B18 - Colorless Mana - Eighteen.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{19}', '<img src="./static/symbols/B19 - Colorless Mana - Nineteen.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{20}', '<img src="./static/symbols/B20 - Colorless Mana - Twenty.svg" width="30" height="30">')
 
-    mana_cost = mana_cost.replace('{W}', '<img src="./static/symbols/A01 - Colored Mana - White.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{U}', '<img src="./static/symbols/A02 - Colored Mana - Blue.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{B}', '<img src="./static/symbols/A03 - Colored Mana - Black.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{R}', '<img src="./static/symbols/A04 - Colored Mana - Red.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{G}', '<img src="./static/symbols/A05 - Colored Mana - Green.svg" width="45" height="45">')
-    mana_cost = mana_cost.replace('{S}', '<img src="./static/symbols/A06 - Colored Mana - Snow.svg" width="45" height="45">')
+    mana_cost = mana_cost.replace('{W}', '<img src="./static/symbols/A01 - Colored Mana - White.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{U}', '<img src="./static/symbols/A02 - Colored Mana - Blue.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{B}', '<img src="./static/symbols/A03 - Colored Mana - Black.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{R}', '<img src="./static/symbols/A04 - Colored Mana - Red.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{G}', '<img src="./static/symbols/A05 - Colored Mana - Green.svg" width="30" height="30">')
+    mana_cost = mana_cost.replace('{S}', '<img src="./static/symbols/A06 - Colored Mana - Snow.svg" width="30" height="30">')
 
 
     
     return Markup(mana_cost)
+
+def get_set_symbol(set_code, rarity):
+    rarity_code = 'c'
+    if rarity == 'uncommon':
+        rarity_code = 'u'
+    elif rarity == 'rare':
+        rarity_code = 'r'
+    elif rarity == 'mythic':
+        rarity_code = 'mr'
+    symbol_file_location = './static/set_symbols/%s-%s.png' % ( set_code, rarity_code )
+    from os.path import exists
+    if exists(symbol_file_location):
+        set_symbol_html = '<img src="%s">' % symbol_file_location
+    else:
+        symbol_file_location = './static/set_symbols/%s.png' % rarity_code
+        set_symbol_html = '<img src="%s">' % symbol_file_location
+
+
+
+    return Markup(set_symbol_html)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -193,6 +213,8 @@ def index():
         print(card_details)
         card_dict = {
             'card_name': str(card_details['name'].values[0]), 
+            'set_code': magic_card_detector.card_detected.split(' - ')[0].upper(),
+            'set_symbol_html': get_set_symbol(magic_card_detector.card_detected.split(' - ')[0].lower(), str(card_details['rarity'].values[0])),
             'mana_cost': str(card_details['manaCost'].values[0]),
             'mana_cost_html': get_mana_symbols(str(card_details['manaCost'].values[0])),
             'rarity': str(card_details['rarity'].values[0])

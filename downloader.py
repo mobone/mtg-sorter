@@ -35,7 +35,7 @@ driver = webdriver.Chrome()
 
 
 @multitasking.task
-def download_image(set_acronym, card_name, card_url):
+def download_image(set_acronym, card_name, card_url, set_number):
 
     downloaded_size = 0
     try:
@@ -53,16 +53,19 @@ def download_image(set_acronym, card_name, card_url):
             urllib.request.urlretrieve(card_url, "./magic_card_detector/cards/%s - %s.png" % (set_acronym, card_name))
             original_filesize = urllib.request.urlopen(card_url).length
             downloaded_size = os.stat("./magic_card_detector/cards/%s - %s.png" % (set_acronym, card_name)).st_size
-            
     except Exception as e:
         print('got exception', e)
         print(set_acronym, card_name, card_url)
     #print('downloaded image', card_url)
 
+    
+    
 
-def download_image_wrapper(card_input):
+
+
+def download_image_wrapper(card_input, set_number):
     set_acronym, card_name, card_url = card_input
-    download_image(set_acronym, card_name, card_url)
+    download_image(set_acronym, card_name, card_url, set_number)
 
 
 
@@ -83,6 +86,8 @@ for set_number in range(0,400):
 
     cards_db = []
     card_tuples = []
+    set_acronym = ''
+    '''
     for card in cards:
         card_url = card.get_attribute('src')
         card_text = card.get_attribute("alt")
@@ -104,21 +109,33 @@ for set_number in range(0,400):
         #    os.mkdir('./cards/'+set_acronym)
         
         
-        '''
-        card_dict = {
-            'card_url': card_url,
-            'card_name': card_name,
-            'set_name': set_name,
-            'set_acronym': set_acronym,
-            'card_path': "./cards/%s/%s.png" % (set_acronym, card_name)
-        }
-        '''
         card_tuple = (set_acronym, card_name, card_url)
         #cards_db.append(card_dict)
         card_tuples.append(card_tuple)
         
     for card in card_tuples:
-        download_image_wrapper(card)
+        download_image_wrapper(card, set_number)
+    '''
+
+    try:
+        urllib.request.urlretrieve('https://www.mtgpics.com/graph/sets/symbols/%s-c.png' % set_acronym.lower(), "./magic_card_detector/set_symbols/%s-c.png" % (set_acronym.lower()))
+    except Exception as e:
+        print(e)
+        print('set number', set_number)
+        print('https://www.mtgpics.com/graph/sets/symbols/%s-c.png' % set_acronym.lower())
+        pass
+    try:
+        urllib.request.urlretrieve('https://www.mtgpics.com/graph/sets/symbols/%s-u.png' % set_acronym.lower(), "./magic_card_detector/set_symbols/%s-u.png" % (set_acronym.lower()))
+    except:
+        pass
+    try:
+        urllib.request.urlretrieve('https://www.mtgpics.com/graph/sets/symbols/%s-r.png' % set_acronym.lower(), "./magic_card_detector/set_symbols/%s-r.png" % (set_acronym.lower()))
+    except:
+        pass
+    try:
+        urllib.request.urlretrieve('https://www.mtgpics.com/graph/sets/symbols/%s-mr.png' % set_acronym.lower(), "./magic_card_detector/set_symbols/%s-mr.png" % (set_acronym.lower()))
+    except:
+        pass
 
     multitasking.wait_for_tasks()
 
