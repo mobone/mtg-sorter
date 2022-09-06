@@ -143,6 +143,7 @@ def index():
         print("full run took", end - start, 'seconds')
         
         print('recognized card as', magic_card_detector.card_detected)
+        conn = sqlite3.connect('/home/admn/Documents/mtg-sorter/www/card.db')
         card_details = pd.read_sql('select * from cards where name == %s and setCode == %s' % (magic_card_detector.card_detected.split(' - ')[1], magic_card_detector.card_detected.split(' - ')[0].upper()), conn).head(1)
         card_dict = {
             'card_name': str(card_details['name']), 
