@@ -87,7 +87,7 @@ for set_number in range(0,400):
     cards_db = []
     card_tuples = []
     set_acronym = ''
-    '''
+    
     for card in cards:
         card_url = card.get_attribute('src')
         card_text = card.get_attribute("alt")
@@ -112,7 +112,7 @@ for set_number in range(0,400):
         card_tuple = (set_acronym, card_name, card_url)
         #cards_db.append(card_dict)
         card_tuples.append(card_tuple)
-        
+    '''
     for card in card_tuples:
         download_image_wrapper(card, set_number)
     '''
