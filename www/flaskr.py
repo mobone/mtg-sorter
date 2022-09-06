@@ -144,7 +144,8 @@ def index():
         
         print('recognized card as', magic_card_detector.card_detected)
         conn = sqlite3.connect('/home/admn/Documents/mtg-sorter/www/card.db')
-        card_details = pd.read_sql('select * from cards where name == "%s" and setCode == "%s"' % (magic_card_detector.card_detected.split(' - ')[1], magic_card_detector.card_detected.split(' - ')[0].upper()), conn).head(1)
+        sql = 'select * from cards where name == "%s" and setCode == "%s"' % (magic_card_detector.card_detected.split(' - ')[1], magic_card_detector.card_detected.split(' - ')[0].upper())
+        card_details = pd.read_sql(sql, conn).head(1)
         print(card_details)
         card_dict = {
             'card_name': str(card_details['name']), 
