@@ -4,5 +4,6 @@ __pycache__/
 *$py.class
 
 
-*.png
+
 *.db
+magic_card_detector/*
