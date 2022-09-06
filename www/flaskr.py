@@ -143,8 +143,13 @@ def index():
         print("full run took", end - start, 'seconds')
         
         print('recognized card as', magic_card_detector.card_detected)
-
-        recognized_cards = [magic_card_detector.card_detected] + recognized_cards
+        card_details = pd.read_sql('select * from cards where name == %s and setCode == %s' % (magic_card_detector.card_detected.split(' - '[1]), magic_card_detector.card_detected.split(' - '[0]).upper()), conn).head(1)
+        card_dict = {
+            'card_name': str(card_details['name']), 
+            'mana_cost': str(card_details['manaCost']),
+            'rarity': str(card_details['rarity'])
+        }
+        recognized_cards = [card_dict] + recognized_cards
 
         magic_card_detector.card_detected = None
         magic_card_detector.set_found = None

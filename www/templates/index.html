@@ -46,9 +46,9 @@
                   {% for recognized_card in recognized_cards %}
                   <tr>
                     
-                    <th score="row">{{ recognized_card }}</th>
-                    <td><img src="/static/symbols/2_symbol.gif"><img src="/static/symbols/white_symbol.gif"><img src="/static/symbols/black_symbol.gif"></td>
-                    <td><img src="/static/symbols/rare_symbol.png"></td>
+                    <th score="row">{{ recognized_card['card_name'] }}</th>
+                    <td>{{ recognized_card['card_name'] }}</td>
+                    <td>{{ recognized_card['rarity'] }}></td>
                   </tr>
                   {% endfor %}
                   

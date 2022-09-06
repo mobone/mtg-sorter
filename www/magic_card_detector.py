@@ -1051,7 +1051,7 @@ def load():
 
     do_profile = False
     card_detector.visual = False
-    card_detector.verbose = False
+    card_detector.verbose = True
 
     # Read the reference and test data sets
     # card_detector.read_and_adjust_reference_images(
