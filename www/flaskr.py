@@ -148,9 +148,9 @@ def index():
         card_details = pd.read_sql(sql, conn).head(1)
         print(card_details)
         card_dict = {
-            'card_name': str(card_details['name']), 
-            'mana_cost': str(card_details['manaCost']),
-            'rarity': str(card_details['rarity'])
+            'card_name': str(card_details['name'].values[0]), 
+            'mana_cost': str(card_details['manaCost'].values[0]),
+            'rarity': str(card_details['rarity'].values[0])
         }
         print(card_dict)
         recognized_cards = [card_dict] + recognized_cards
