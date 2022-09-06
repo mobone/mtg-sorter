@@ -423,7 +423,7 @@ class ReferenceImage:
         """
         Calculates the perceptive hash for the image
         """
-        self.phash = imagehash.phash_simple(
+        self.phash = imagehash.phash(
             PILImage.fromarray(np.uint8(255 * cv2.cvtColor(
                 self.adjusted, cv2.COLOR_BGR2RGB))),
             hash_size=32)
@@ -855,12 +855,12 @@ class MagicCardDetector:
         d_0 = np.zeros((len(self.reference_images), len(rotations)))
         for j, rot in enumerate(rotations):
             if not -1.e-5 < rot < 1.e-5:
-                phash_im = imagehash.phash_simple(
+                phash_im = imagehash.phash(
                     PILImage.fromarray(np.uint8(255 * cv2.cvtColor(
                         rotate(im_seg, rot), cv2.COLOR_BGR2RGB))),
                     hash_size=32)
             else:
-                phash_im = imagehash.phash_simple(
+                phash_im = imagehash.phash(
                     PILImage.fromarray(np.uint8(255 * cv2.cvtColor(
                         im_seg, cv2.COLOR_BGR2RGB))),
                     hash_size=32)
