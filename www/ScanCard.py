@@ -54,4 +54,4 @@ def scan_card():
     #camera.close()
 
 if __name__ == '__main__':
-    pass
+    scan_card()
