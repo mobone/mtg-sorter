@@ -3,7 +3,7 @@ import magic_card_detector as mcg
 
 
 card_detector = mcg.MagicCardDetector(output_path='.')
-card_detector.read_and_adjust_reference_images('./cards/')
+card_detector.read_and_adjust_reference_images('.magic_card_detector/cards/')
 
 hlist = []
 for image in card_detector.reference_images:

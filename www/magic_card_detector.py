@@ -720,8 +720,8 @@ class MagicCardDetector:
         #filenames = filenames + filenames_jpg
         #print('found this many filenames', filenames)
         for filename in filenames:
-            if 'current_scan' not in filename:
-                continue
+            #if 'current_scan' not in filename:
+            #    continue
             img = cv2.imread(filename)
             #img = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)
             if min(img.shape[0], img.shape[1]) > maxsize:
